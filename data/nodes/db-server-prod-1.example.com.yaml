@@ -1,3 +1,2 @@
 ---
-classes:
-  - role::database_server
+role: 'role::database_server'

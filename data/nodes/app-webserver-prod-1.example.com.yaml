@@ -1,3 +1,2 @@
 ---
-classes:
-  - role::webserver
+role: 'role::webserver'
