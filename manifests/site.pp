@@ -3,10 +3,10 @@ if $clientcert {
   # make sure EVERY node gets your baseline settings
   include profile::base
 
-  # Look in Hiera for roles to be included. This method will permit multiple roles
-  # to be assigned to a single node.
-  include(lookup('classes', Array[String], 'unique', []))
-
-  # This is an alternate method that would only permit a single role to be assigned
-  # include(lookup('role', String, 'first', undef))
+  # Look in Hiera for the role to be included. This method will only permit a
+  # single role to be assigned to a node.
+  $_node_role = lookup('role', String, 'first', '')
+  unless empty($_node_role) {
+    include($_node_role)
+  }
 }

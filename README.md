@@ -33,9 +33,9 @@ Here is an abbreviated list of the files in this demo and how they fit into the 
 1. Each time an agent checks in with a master, `manifests/site.pp` is applied. That manifest causes two things to happen:
 
    - `site-modules/profile/manifests/base.pp` is applied
-   - additional classes are included (applied) by way of a hiera lookup for a key named `classes`
+   - an additional class is included (applied) by way of a hiera lookup for a key named `role`
 
-2. If the node checking in is named `app-webserver-prod-1.example.com` the configuration in `hiera.yaml` will cause the classes array in `data/nodes/app-webserver-prod-1.example.com.yaml` to be returned to by the hiera lookup. 
-3. The `classes` array in `data/nodes/app-webserver-prod-1.example.com.yaml` contains `role::webserver` so `site-modules/role/manifests/webserver.pp` will be applied to the node.
+2. If the node checking in is named `app-webserver-prod-1.example.com` the configuration in `hiera.yaml` will cause the classes array in `data/nodes/app-webserver-prod-1.example.com.yaml` to be returned to by the hiera lookup.
+3. The `role` key in `data/nodes/app-webserver-prod-1.example.com.yaml` contains `role::webserver` so `site-modules/role/manifests/webserver.pp` will be applied to the node.
 4. `site-modules/role/manifests/webserver.pp` contains `include profile::nginx` so `site-modules/profile/manifests/nginx.pp` will also be applied.
 5. `site-modules/profile/manifests/nginx.pp` contains `include nginx` so the nginx module listed in the `Puppetfile` will be applied to the node.
